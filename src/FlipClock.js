@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import FlipDigit from './FlipDigit';
 
 export default class FlipClock extends Component {
   constructor() {
@@ -12,14 +13,14 @@ export default class FlipClock extends Component {
   render() {
     var digits = this._extractDigits();
     return <div style={style.main}>
-        <div>{digits[0]}</div>
-        <div>{digits[1]}</div>
+        <FlipDigit value={digits[0]}/>
+        <FlipDigit value={digits[1]}/>
         :
-        <div>{digits[2]}</div>
-        <div>{digits[3]}</div>
+        <FlipDigit value={digits[2]}/>
+        <FlipDigit value={digits[3]}/>
         :
-        <div>{digits[4]}</div>
-        <div>{digits[5]}</div>
+        <FlipDigit value={digits[4]}/>
+        <FlipDigit value={digits[5]}/>
       </div>
   }
   _extractDigits() {
