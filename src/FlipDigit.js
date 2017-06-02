@@ -3,31 +3,52 @@ import React, { Component } from 'react';
 class FlipDigit extends Component {
   constructor(props) {
     super(props);
-    this.state = { };
-    this.applyProps(props);
+    this.state = {
+      brother: {
+        className: 'up',
+        value: 0
+      },
+      sister: {
+        className: 'down',
+        value: this.props.value
+      },
+      activeDigit: 'brother'
+    };
   }
 
   applyProps(props) {
-    setTimeout(() => this.onFlipTransitionEnd(), 1500);
+    const activeDigitValues = {
+      className: 'down',
+      value: props.value
+    }
+    const activeDigit = (this.state.activeDigit ===  'brother') ? 'sister' : 'brother';
+    const inActiveDigit = (this.state.activeDigit ===  'brother') ? 'brother' : 'sister';
+    const newState = {
+      ...this.state,
+      [activeDigit]: activeDigitValues,  
+      [inActiveDigit]: { className: 'up', value: this.state[inActiveDigit].value },
+      activeDigit: activeDigit
+    };
+    this.setState(newState);
   }
 
   componentWillReceiveProps(nextProps) {
     this.applyProps(nextProps);
   }
 
-  render() {
-    let flipDown = this.props.value !== this.state.currentValue ? 'flip-down' : '';
-    return(
-      <span className="digitContainer">
-        <span className="digit down">{ this.state.currentValue }</span>
-        <span className={ `${ flipDown } digit up`} onTransitionEnd={ (e) => this.onFlipTransitionEnd(e) }>{ this.props.value }</span>
-      </span>
-    )
+  shouldComponentUpdate(nextProps) {
+    return (nextProps.value !== this.props.value);
   }
 
-  onFlipTransitionEnd() {
-    const next = this.props.value;
-    this.setState({ currentValue: next });
+  render() {
+    const brother = this.state.brother;
+    const sister = this.state.sister;
+    return(
+      <span className="digitContainer">
+        <span className={ `digit ${ brother.className }` }>{ brother.value }</span>
+        <span className={ `digit ${ sister.className }` }>{ sister.value }</span>
+      </span>
+    )
   }
 }
 

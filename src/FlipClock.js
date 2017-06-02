@@ -12,13 +12,13 @@ export default class FlipClock extends Component {
   }
   render() {
     var digits = this._extractDigits();
-    return <div style={style.main}>
+    return <div className="clockContainer">
         <FlipDigit value={digits[0]}/>
         <FlipDigit value={digits[1]}/>
-        :
+        <span className="colon">:</span>
         <FlipDigit value={digits[2]}/>
         <FlipDigit value={digits[3]}/>
-        :
+        <span className="colon">:</span>
         <FlipDigit value={digits[4]}/>
         <FlipDigit value={digits[5]}/>
       </div>
@@ -37,10 +37,3 @@ function toDigits(number) {
   if (str.length === 1) str = '0' + str;
   return [str[0], str[1]];
 }
-
-var style = {
-  main: {
-    display: 'flex',
-  }
-};
-
