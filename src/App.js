@@ -6,8 +6,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header>Flipdown Clock</header>
-        <FlipClock />
+        <header>React Flipdown Clock</header>
+        <div className="flexVertical">
+          <FlipClock />
+        </div>
       </div>
     );
   }

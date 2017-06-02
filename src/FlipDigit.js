@@ -4,15 +4,15 @@ class FlipDigit extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      brother: {
-        className: 'up',
-        value: 0
-      },
       sister: {
         className: 'down',
         value: this.props.value
       },
-      activeDigit: 'brother'
+      brother: {
+        className: 'up',
+        value: 0
+      },
+      activeDigit: 'sister'
     };
   }
 
