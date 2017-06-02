@@ -22,7 +22,7 @@ body {
   clear: both;
   color: white;
   font-size: 48px;
-  padding: 2rem;
+  padding: 2rem 0;
   margin-bottom: 2rem;
 }
 
@@ -76,4 +76,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
