@@ -4,32 +4,19 @@ class FlipDigit extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sister: {
-        className: 'down',
-        value: this.props.value
-      },
-      brother: {
-        className: 'up',
-        value: 0
-      },
-      activeDigit: 'sister'
+      '0': this.props.value,
+      '1': 0,
+      activeDigit: 0
     };
   }
 
   applyProps(props) {
-    const activeDigitValues = {
-      className: 'down',
-      value: props.value
-    }
-    const activeDigit = (this.state.activeDigit ===  'brother') ? 'sister' : 'brother';
-    const inActiveDigit = (this.state.activeDigit ===  'brother') ? 'brother' : 'sister';
-    const newState = {
+    const nextActiveDigit = Number(!this.state.activeDigit);
+    this.setState({
       ...this.state,
-      [activeDigit]: activeDigitValues,  
-      [inActiveDigit]: { className: 'up', value: this.state[inActiveDigit].value },
-      activeDigit: activeDigit
-    };
-    this.setState(newState);
+      [nextActiveDigit]: props.value,
+      activeDigit: Number(nextActiveDigit)
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -41,12 +28,15 @@ class FlipDigit extends Component {
   }
 
   render() {
-    const brother = this.state.brother;
-    const sister = this.state.sister;
+    const brotherValue = Number(this.state[0]);
+    const sisterValue = Number(this.state[1]);
+    const brotherClass = (!this.state.activeDigit) ? 'down' : 'up';
+    const sisterClass = (this.state.activeDigit) ? 'down' : 'up';
+
     return(
       <span className="digitContainer">
-        <span className={ `digit ${ brother.className }` }>{ brother.value }</span>
-        <span className={ `digit ${ sister.className }` }>{ sister.value }</span>
+        <span className={ `digit ${ brotherClass }` }>{ brotherValue }</span>
+        <span className={ `digit ${ sisterClass }` }>{ sisterValue }</span>
       </span>
     )
   }
